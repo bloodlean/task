@@ -100,13 +100,13 @@ def task(request):
 @permission_classes([TaskDetailPermission])
 def task_detail(request, pk):
 
-    student = Task.objects.get(pk=pk)
+    task = Task.objects.get(pk=pk)
 
     if request.method == 'GET':
-        serializer = TaskSerializer(student)
+        serializer = TaskSerializer(task)
         return Response(serializer.data, status=HTTP_202_ACCEPTED)  
     elif request.method == 'PUT':
-        serializer = TaskSerializer(student, data=request.data)
+        serializer = TaskSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_202_ACCEPTED)
