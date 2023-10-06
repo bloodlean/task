@@ -55,7 +55,7 @@ def project(request):
         serializer = ProjectSerializer(project, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = ProjectSerializer(project, data=request.data)
+        serializer = ProjectSerializer(project, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_201_CREATED)
@@ -90,7 +90,7 @@ def task(request):
         serializer = TaskSerializer(task, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = TaskSerializer(task, data=request.data)
+        serializer = TaskSerializer(task, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_201_CREATED)
