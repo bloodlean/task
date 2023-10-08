@@ -14,11 +14,11 @@ def user(request):
 
     if request.method == 'GET':
         user = User.objects.all()
-        serializer = UserSerializer(user, many=True)
+        serializer = UserSerializer(User, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
 
     elif request.method == 'POST':
-        serializer = UserSerializer(user, data=request.data)
+        serializer = UserSerializer(User, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_201_CREATED)
@@ -35,7 +35,7 @@ def user_detail(request, pk):
         return Response(serializer.data, status=HTTP_202_ACCEPTED)   
 
     elif request.method == 'PUT':
-        serializer = UserSerializer(user, data=request.data)
+        serializer = UserSerializer(User, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_202_ACCEPTED)
@@ -52,10 +52,10 @@ def project(request):
 
     if request.method == 'GET':
         project = Project.objects.all()
-        serializer = ProjectSerializer(project, many=True)
+        serializer = ProjectSerializer(Project, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = ProjectSerializer(project, data=request.data, partial=True)
+        serializer = ProjectSerializer(Project, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_201_CREATED)
@@ -71,7 +71,7 @@ def project_detail(request, pk):
         serializer = ProjectSerializer(project)
         return Response(serializer.data, status=HTTP_202_ACCEPTED) 
     elif request.method == 'PUT':
-        serializer = ProjectSerializer(project, data=request.data)
+        serializer = ProjectSerializer(Project, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_202_ACCEPTED)
@@ -87,10 +87,10 @@ def task(request):
 
     if request.method == 'GET':
         task = Task.objects.all()
-        serializer = TaskSerializer(task, many=True)
+        serializer = TaskSerializer(Task, many=True)
         return Response(serializer.data, status=HTTP_200_OK)
     elif request.method == 'POST':
-        serializer = TaskSerializer(task, data=request.data, partial=True)
+        serializer = TaskSerializer(Task, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_201_CREATED)
@@ -106,7 +106,7 @@ def task_detail(request, pk):
         serializer = TaskSerializer(task)
         return Response(serializer.data, status=HTTP_202_ACCEPTED)  
     elif request.method == 'PUT':
-        serializer = TaskSerializer(task, data=request.data)
+        serializer = TaskSerializer(Task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=HTTP_202_ACCEPTED)
