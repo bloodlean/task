@@ -28,7 +28,7 @@ class Task(models.Model):
 
     title = models.CharField('Название задачи', max_length=256)
     description = models.TextField('Описание задачи', blank=True, null=True)
-    deadline_date = models.DateField('Крайний срока')
+    deadline_date = models.DateField('Крайний срока', blank=True, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Проект')
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Назначен на')   
     completed = models.BooleanField('Завершен', default=False)
